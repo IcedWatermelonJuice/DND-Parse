@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>DNS解析</title>
+		<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+		<script src="js/jquery.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body>
+		<input data-type="text" id="inputBox" />
+		<button id="paurseBtn">解析</button>
+		<button id="clearBtn">清屏</button>
+		<div id="displayBox">
+			<ul>
+				<li>
+					<span>IPv4 地址 : </span>
+					<span>
+						<ol data-type="A"></ol>
+					</span>
+				</li>
+				<li>
+					<span>NS 记录 : </span>
+					<span>
+						<ol data-type="NS"></ol>
+					</span>
+				</li>
+				<li>
+					<span>域名 CNAME 记录 : </span>
+					<span>
+						<ol data-type="CNAME"></ol>
+					</span>
+				</li>
+				<li>
+					<span>ZONE 的 SOA 记录 : </span>
+					<span>
+						<ol data-type="SOA"></ol>
+					</span>
+				</li>
+				<li>
+					<span>TXT 记录 : </span>
+					<span>
+						<ol data-type="TXT"></ol>
+					</span>
+				</li>
+				<li>
+					<span>IPv6 地址 : </span>
+					<span>
+						<ol data-type="AAAA"></ol>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
