@@ -11,7 +11,7 @@ function getUrl() {
 }
 
 function dnsParse(name, type) {
-	var dns = "http://dns.alidns.com/resolve?name=" + name + ".&type=" + type;
+	var dns = "https://dns.alidns.com/resolve?name=" + name + ".&type=" + type;
 	console.log(dns);
 	var data = [];
 	$.ajax({
