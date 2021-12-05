@@ -45,6 +45,34 @@ function displayResult(data) {
 	}
 }
 
+function fromUrl(keys){
+	if(!keys||typeof keys!=="string"){
+		return false;
+	}
+	var queryData=location.search;
+	if(!queryData){
+		return false;
+	}
+	queryData=queryData.slice(1).split("&");
+	var queryJson={};
+	for(let i in queryData){
+		let dataArray=queryData[i].split("=");
+		if(dataArray[0]){
+			queryJson[dataArray[0]]=dataArray[1];
+		}
+	}
+	keys=keys.split(",");
+	if(keys.length===1){
+		return queryJson[keys[0]];
+	}else{
+		var res={};
+		for(let i in keys){
+			res[keys[i]]=queryJson[keys[i]];
+		}
+		return res;
+	}
+}
+
 $(function(){
 	var data = {
 		"url": null,
@@ -106,4 +134,9 @@ $(function(){
 			temp[i].innerHTML = "";
 		}
 	})
+	var queryLink=fromUrl("url");
+	if(queryLink){
+		$("#inputBox").val(queryLink);
+		$("#paurseBtn").click();
+	}
 })
