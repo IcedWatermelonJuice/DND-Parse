@@ -1,6 +1,6 @@
 function getUrl() {
 	var url = $("#inputBox").val();
-	url = url.replace(/\s+/g, "");
+	url = decodeURIComponent(url.replace(/\s+/g, ""));
 	if (/^((http|https):\/\/)?(([A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\.)+([A-Za-z]+)[/\?\:]?.*$/i.test(url)) {
 		console.log("待解析地址:" + url);
 		url = url.replace(/http:\/\/|https:\/\//, "");
@@ -136,7 +136,7 @@ $(function(){
 	})
 	var queryLink=fromUrl("url");
 	if(queryLink){
-		$("#inputBox").val(queryLink);
+		$("#inputBox").val(decodeURIComponent(queryLink));
 		$("#paurseBtn").click();
 	}
 })
