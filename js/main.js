@@ -1,5 +1,5 @@
 function getUrl() {
-	var url = $("#inputBox").val();
+	var url = $(".dns-text").val();
 	url = decodeURIComponent(url.replace(/\s+/g, ""));
 	if (/^((http|https):\/\/)?(([A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\.)+([A-Za-z]+)[/\?\:]?.*$/i.test(url)) {
 		console.log("待解析地址:" + url);
@@ -35,13 +35,12 @@ function dnsParse(name, type) {
 }
 
 function displayResult(data) {
-	var html = "";
 	for (let i in data) {
-		html = "";
+		let html = "";
 		for (let j in data[i].result) {
-			html += "<li>" + data[i].result[j] + "</li>";
+			html += `${data[i].result[j]}<br>`;
 		}
-		$("ol[data-type=" + data[i].type + "]").html(html);
+		$(`.parse-box-value[data-name=${data[i].type}]`).html(html?html.replace(/<br>$/,""):`<span style="color:red">暂无数据，获取失败</span>`);
 	}
 }
 
@@ -114,29 +113,41 @@ $(function(){
 			}
 		]
 	}
-	$("#paurseBtn").click(function() {
+	$(".dns-btn").click(function() {
 		data.url = getUrl();
 		if (!data.url) {
 			alert("url错误");
 			return false;
 		}
 		console.log("正在解析:"+data.url);
-		for (let i in data.data) {
-			data.data[i].result = dnsParse(data.url, data.data[i].id);
+		for (let d of data.data) {
+			d.result = dnsParse(data.url, d.id);
 		}
 		console.log(data);
 		displayResult(data.data);
 	})
-	$("#clearBtn").click(function() {
-		$("#inputBox").val("");
-		var temp = $("#displayBox").find("ol");
-		for (let i in temp) {
-			temp[i].innerHTML = "";
-		}
-	})
 	var queryLink=fromUrl("url");
 	if(queryLink){
-		$("#inputBox").val(decodeURIComponent(queryLink));
-		$("#paurseBtn").click();
+		$(".dns-text").val(decodeURIComponent(queryLink));
+		$(".dns-btn").click();
 	}
+	$.get("./README.md", (res) => {
+		if (typeof res === "string" && res) {
+			$(".markdown-content").html(marked.parse(res));
+		}
+	})
+	$(".markdown-btn svg").click((e) => {
+		e = $(e.currentTarget);
+		if (e.children("title").text() === "展开") {
+			e.children("title").text("收起");
+			$(e).children("svg path").attr("d", "M6 10L42 10 M6 20L42 20 M6 40L24 26L42 40");
+			$(".markdown-btn").attr("show", "");
+			$(".markdown-content").removeAttr("hidden");
+		} else {
+			e.children("title").text("展开");
+			$(e).children("svg path").attr("d", "M6 10L42 10 M6 20L42 20 M6 40L24 26L42 40");
+			$(".markdown-btn").removeAttr("show");
+			$(".markdown-content").attr("hidden", "");
+		}
+	})
 })

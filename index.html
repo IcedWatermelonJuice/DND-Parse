@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 		<title>DNS解析</title>
-		<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<script src="js/jquery.js"></script>
+		<script src="js/marked.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 	<body>
-		<input data-type="text" id="inputBox" />
-		<button id="paurseBtn">解析</button>
-		<button id="clearBtn">清屏</button>
-		<div id="displayBox">
-			<ul>
-				<li>
-					<span>IPv4 地址 : </span>
-					<span>
-						<ol data-type="A"></ol>
-					</span>
-				</li>
-				<li>
-					<span>NS 记录 : </span>
-					<span>
-						<ol data-type="NS"></ol>
-					</span>
-				</li>
-				<li>
-					<span>域名 CNAME 记录 : </span>
-					<span>
-						<ol data-type="CNAME"></ol>
-					</span>
-				</li>
-				<li>
-					<span>ZONE 的 SOA 记录 : </span>
-					<span>
-						<ol data-type="SOA"></ol>
-					</span>
-				</li>
-				<li>
-					<span>TXT 记录 : </span>
-					<span>
-						<ol data-type="TXT"></ol>
-					</span>
-				</li>
-				<li>
-					<span>IPv6 地址 : </span>
-					<span>
-						<ol data-type="AAAA"></ol>
-					</span>
-				</li>
-			</ul>
+		<div class="main-box">
+			<h1 class="title-box">DNS解析</h1>
+			<div class="dns-box">
+				<input type="text" class="dns-text" />
+				<input type="button" class="dns-btn" value="解析" />
+			</div>
+			<table class="parse-box">
+				<tr>
+					<td class="parse-box-name" data-name="A">IPv4地址</td>
+					<td class="parse-box-value" data-name="A"></td>
+				</tr>
+				<tr>
+					<td class="parse-box-name" data-name="AAAA">IPv6地址</td>
+					<td class="parse-box-value" data-name="AAAA"></td>
+				</tr>
+				<tr>
+					<td class="parse-box-name" data-name="NS">NS记录</td>
+					<td class="parse-box-value" data-name="NS"></td>
+				</tr>
+				<tr>
+					<td class="parse-box-name" data-name="CNAME">域名CNAME记录</td>
+					<td class="parse-box-value" data-name="CNAME"></td>
+				</tr>
+				<tr>
+					<td class="parse-box-name" data-name="SOA">ZONE的SOA记录</td>
+					<td class="parse-box-value" data-name="SOA"></td>
+				</tr>
+				<tr>
+					<td class="parse-box-name" data-name="TXT">TXT记录</td>
+					<td class="parse-box-value" data-name="TXT"></td>
+				</tr>
+			</table>
+			<div class="markdown-box">
+				<div class="markdown-btn">
+					<span>网站相关</span>
+					<svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<title>展开</title>
+						<path d="M6 9L42 9 M6 19L42 19 M6 26L24 40L42 26" style="stroke:currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</div>
+				<div class="markdown-content" hidden>正在加载</div>
+			</div>
 		</div>
 	</body>
 </html>
